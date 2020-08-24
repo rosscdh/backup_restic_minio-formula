@@ -19,9 +19,11 @@ docker-image-mysql:
 {%- for app in config.targets %}
 {%- set db_config   = config.get(app.get('db_type', 'postgres')) %}
 {%- set command     = app.get('command', '') %}
-{%- set args        = app.get('args', '') %}
-{%- set image        = app.get('image', db_config.get('image') ) %}
-{%- set docker_start_command = "/usr/bin/docker run %s --name=%s %s %s %s"|format(app.run_ops, app.name, image, command, args) %}
+{%- set args        = app.get('args', []) | join(' ') %}
+{%- set image       = app.get('image', db_config.get('image') ) %}
+{%- set run_ops     = app.get('run_ops', []) | join(' ') ) %}
+
+{%- set docker_start_command = "/usr/bin/docker run %s --name=%s %s %s %s"|format(run_ops, app.name, image, command, args) %}
 backup_run_{{ app.name }}:
   cmd.run:
     - name: {{ docker_start_command }}
