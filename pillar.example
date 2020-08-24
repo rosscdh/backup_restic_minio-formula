@@ -13,7 +13,7 @@ backup_restic_minio:
       # -e - INIT_RESTORE_LATEST: ""
       # -e - INIT_RESTORE_URL: ""
       - -e MINIO_HOST="assets"
-      - -e MINIO_HOST_URL="https://assets.bienert.tech"
+      - -e MINIO_HOST_URL="https://assets.example.com"
       - -e MINIO_ACCESS_KEY="bit-test-backup"
       - -e MINIO_SECRET_KEY="bit-test-backup"
       - -e MINIO_BUCKET="bit-test-backup/myservice"
