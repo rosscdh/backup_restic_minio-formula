@@ -9,4 +9,4 @@ docker-containers:
       {%- if app.docker_args and app.docker_args|length %}
       runoptions: {{ app.docker_args | list }}
       {%- endif %}
-    {%- endif %}
+    {%- endfor %}
