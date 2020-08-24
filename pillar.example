@@ -3,20 +3,20 @@ backup_restic_minio:
     - name: elephantservice
       db_type: postgres
       run_ops:
-      - -e POSTGRES_HOST="postgres"
-      - -e POSTGRES_PORT="5432"
-      - -e POSTGRES_USER="postgres"
-      - -e POSTGRES_PASSWORD="password"
-      # -e -POSTGRES_DB: "--all-databases"
-      - -e POSTGRES_DB=my_application_development
-      - -e MAX_BACKUPS="3"
-      - -e INIT_BACKUP="1"
-      # -e - INIT_RESTORE_LATEST: ""
-      # -e - INIT_RESTORE_URL: ""
-      - -e MINIO_HOST="assets"
-      - -e MINIO_HOST_URL="https://assets.example.com"
-      - -e MINIO_ACCESS_KEY="bit-test-backup"
-      - -e MINIO_SECRET_KEY="bit-test-backup"
-      - -e MINIO_BUCKET="bit-test-backup/myservice"
-      - -e RESTIC_PASSWORD="password123"
-      - --rm
+      - '-e POSTGRES_HOST="postgres"'
+      - '-e POSTGRES_PORT="5432"'
+      - '-e POSTGRES_USER="postgres"'
+      - '-e POSTGRES_PASSWORD="password"'
+      # '-e -POSTGRES_DB: "--all-databases"'
+      - '-e POSTGRES_DB=my_application_development'
+      - '-e MAX_BACKUPS="3"'
+      - '-e INIT_BACKUP="1"'
+      # '-e - INIT_RESTORE_LATEST: ""'
+      # '-e - INIT_RESTORE_URL: ""'
+      - '-e MINIO_HOST="assets"'
+      - '-e MINIO_HOST_URL="https://assets.example.com"'
+      - '-e MINIO_ACCESS_KEY="bit-test-backup"'
+      - '-e MINIO_SECRET_KEY="bit-test-backup"'
+      - '-e MINIO_BUCKET="bit-test-backup/myservice"'
+      - '-e RESTIC_PASSWORD="password123"'
+      - '--rm'

@@ -9,6 +9,9 @@ provisioner:
   log_level: debug
   require_chef: false
   formula: backup_restic_minio
+  init_environment: |
+    sudo apt-get update
+    sudo apt-get install -y git
   dependencies:
     - name: docker
       repo: git
@@ -18,20 +21,19 @@ provisioner:
   state_top:
     base:
       "*":
-        - docker
+        - docker.containers
         - backup_restic_minio
   pillars:
     top.sls:
       base:
         '*':
-        - docker
-        - docker.container
         - backup_restic_minio
 
 platforms:
-  - name: centos
-    driver_config:
-      run_command: /usr/lib/systemd/systemd
+  - name: debian
+  # - name: centos
+  #   driver_config:
+  #     run_command: /usr/lib/systemd/systemd
 
 suites:
   - name: default
@@ -39,7 +41,6 @@ suites:
       state_top:
         base:
           '*':
-          - docker
           - backup_restic_minio
 
 verifier:
