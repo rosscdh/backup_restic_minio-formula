@@ -1,7 +1,8 @@
 backup_restic_minio:
   targets:
-    - name: myservice
-      docker_args:
+    - name: elephantservice
+      db_type: postgres
+      run_ops:
       - -e POSTGRES_HOST="postgres"
       - -e POSTGRES_PORT="5432"
       - -e POSTGRES_USER="postgres"
@@ -17,4 +18,5 @@ backup_restic_minio:
       - -e MINIO_ACCESS_KEY="bit-test-backup"
       - -e MINIO_SECRET_KEY="bit-test-backup"
       - -e MINIO_BUCKET="bit-test-backup/myservice"
-      - -e RESTIC_PASSWORD="password123" \
+      - -e RESTIC_PASSWORD="password123"
+      - --rm

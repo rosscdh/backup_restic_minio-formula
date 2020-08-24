@@ -9,12 +9,23 @@ provisioner:
   log_level: debug
   require_chef: false
   formula: backup_restic_minio
+  dependencies:
+    - name: docker
+      repo: git
+      source: https://github.com/saltstack-formulas/docker-formula
   pillars-from-files:
     backup_restic_minio.sls: pillar.example
+  state_top:
+    base:
+      "*":
+        - docker
+        - backup_restic_minio
   pillars:
     top.sls:
       base:
         '*':
+        - docker
+        - docker.container
         - backup_restic_minio
 
 platforms:
@@ -28,6 +39,7 @@ suites:
       state_top:
         base:
           '*':
+          - docker
           - backup_restic_minio
 
 verifier:
