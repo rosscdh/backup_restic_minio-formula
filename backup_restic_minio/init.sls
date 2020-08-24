@@ -5,8 +5,8 @@ docker-containers:
     {%- for app in config.targets %}
     {{ app.name }}:
       image: {{ app.image }}
-      {%- if app.command and app.command|length %}cmd: {{ app.command }}{%- endif %}
-      {%- if app.docker_args and app.docker_args|length %}
+      {%- if app.command is defined and app.command|length %}cmd: {{ app.command }}{%- endif %}
+      {%- if app.docker_args is defined and app.docker_args|length %}
       runoptions: {{ app.docker_args | list }}
       {%- endif %}
     {%- endfor %}
