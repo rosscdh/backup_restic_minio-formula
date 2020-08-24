@@ -1,0 +1,7 @@
+name: backup_restic_minio
+os: CentOS
+os_family: RedHat
+version: 0.0.1
+release: 1
+description: Using restic and minio and docker to backup dbs
+top_level_dir:  backup_restic_minio

@@ -1,0 +1,16 @@
+backup_restic_minio:
+  postgres:
+    image: rosscdh/docker-postgres-backup:12.3
+    restart: never
+    pull_before_start: true
+    remove_before_start: true
+    remove_on_stop: true
+
+  mysql:
+    image: rosscdh/docker-mysql-backup:latest
+    restart: never
+    pull_before_start: true
+    remove_before_start: true
+    remove_on_stop: true
+
+  targets: []

@@ -1,0 +1,2 @@
+{% import_yaml 'backup_restic_minio/config/defaults.yaml' as preconfig %}
+{% set config = salt.pillar.get( 'backup_restic_minio', default=preconfig.backup_restic_minio, merge=True ) %}
