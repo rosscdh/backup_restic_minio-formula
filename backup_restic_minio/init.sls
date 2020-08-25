@@ -30,7 +30,7 @@ backup_run_{{ app.name }}:
   cmd.run:
     - name: {{ docker_start_command }}
 
-bit/backup_run/status/update:
+bit/backup_run/status/ok:
   event.send:
     - data:
         status: "OK"
@@ -38,7 +38,7 @@ bit/backup_run/status/update:
     - require:
       - 'backup_run_{{ app.name }}'
 
-bit/backup_run/status/update:
+bit/backup_run/status/fail:
   event.send:
     - data:
         status: "FAIL"
