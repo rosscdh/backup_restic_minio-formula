@@ -2,6 +2,7 @@
 include:
   - docker
 
+{%- if config.update_images %}
 docker-image-postgres:
   cmd.run:
     - name: docker pull {{ config.postgres.image }} | grep "Postgres Image is up to date" >/dev/null 2>&1 || echo "changed=yes comment='Image updated'"
@@ -15,6 +16,7 @@ docker-image-mysql:
     - stateful: True
     - require:
       - service: docker-service
+{%- endif %}
 
 {%- for app in config.targets %}
 {%- set db_config   = config.get(app.get('db_type', 'postgres')) %}
@@ -23,7 +25,7 @@ docker-image-mysql:
 {%- set image       = app.get('image', db_config.get('image')) %}
 {%- set run_ops     = app.get('run_ops', []) | join(' ') %}
 
-{%- set docker_start_command = "/usr/bin/docker run %s --name=%s %s %s %s"|format(run_ops, app.name, image, command, args) %}
+{%- set docker_start_command = "%s run %s --name=%s %s %s %s"|format(config.docker_bin, run_ops, app.name, image, command, args) %}
 backup_run_{{ app.name }}:
   cmd.run:
     - name: {{ docker_start_command }}
