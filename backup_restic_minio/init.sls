@@ -35,6 +35,7 @@ bit/backup_run/status/ok:
     - data:
         status: "OK"
         name: {{ app.name }}
+        minion: {{ grains.id }}
     - require:
       - 'backup_run_{{ app.name }}'
 
@@ -43,6 +44,7 @@ bit/backup_run/status/fail:
     - data:
         status: "FAIL"
         name: {{ app.name }}
+        minion: {{ grains.id }}
     - onfail:
       - 'backup_run_{{ app.name }}'
 
