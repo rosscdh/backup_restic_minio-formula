@@ -29,4 +29,21 @@ docker-image-mysql:
 backup_run_{{ app.name }}:
   cmd.run:
     - name: {{ docker_start_command }}
+
+bit/backup_run/status/update:
+  event.send:
+    - data:
+        status: "OK"
+        name: {{ app.name }}
+    - require:
+      - 'backup_run_{{ app.name }}'
+
+bit/backup_run/status/update:
+  event.send:
+    - data:
+        status: "FAIL"
+        name: {{ app.name }}
+    - onfail:
+      - 'backup_run_{{ app.name }}'
+
 {%- endfor %}
